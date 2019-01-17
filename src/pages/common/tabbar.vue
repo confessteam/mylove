@@ -1,18 +1,10 @@
 <template>
-  <div id="hello">
-    {{msg}}
-    <div>
-        <tabbar></tabbar>
-    </div>
-  </div>
+  <div id="hello">msg</div>
 </template>
 
 <script>
-  import Tabbar from '../common/tabbar.vue'
-
   export default {
-    components: {Tabbar},
-    name: 'home',
+    name: 'tabbar',
     data () {
       return {
         msg: 'home'
