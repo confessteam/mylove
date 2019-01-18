@@ -18,6 +18,7 @@
     <!--表单-->
     <form action="#" id="form">
       <ul>
+        <span v-text="errorInfo" class="error"></span>
         <li><input type="text" placeholder="手机号" @blur="getIcon"></li>
         <li><input type="text" placeholder="验证码"></li>
         <div class="getcode-right">获取验证码</div>
@@ -30,17 +31,35 @@
 </template>
 
 <script>
+  import { Button } from 'vant'
+  import axios from 'axios'
+
   export default {
+    components: {
+      [Button.name]: Button,
+    },
     name: 'home',
     data () {
       return {
         msg: 'login',
-        icon: 'https://avatar.csdn.net/6/D/3/3_riddle1981.jpg'
+        icon: 'https://avatar.csdn.net/6/D/3/3_riddle1981.jpg',
+        errorInfo: '这是个错误'
       }
     },
     methods: {
-      getIcon:function () {
-        console.log('success')
+      getIcon: function () {
+        console.log(11111);
+        axios.get('http://www.fand.wang:8890/user/get_vcode', {
+          params: {
+            phonenum:15735183194,
+          }
+        })
+          .then(function (response) {
+            console.log(response.data)
+          })
+          .catch(function (response) {
+            console.log(response)
+          })
       }
     }
   }
@@ -112,5 +131,10 @@
     font-size: 0.46rem;
     background-color: #EB8F81;
     border-radius: 0.2rem;
+  }
+
+  .error{
+    color: red;
+    font-size: 0.3rem;
   }
 </style>

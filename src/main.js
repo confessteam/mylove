@@ -8,7 +8,6 @@ import './assets/styles/border.css'
 import fastClick from 'fastclick'
 import iconfont from './assets/styles/iconfont.css'
 
-
 Vue.config.productionTip = false
 fastClick.attach(document.body)
 
