@@ -19,7 +19,7 @@
     <form action="#" id="form">
       <ul>
         <span v-text="errorInfo" class="error"></span>
-        <li><input type="text" placeholder="手机号" @blur="getIcon"></li>
+        <li><input type="text" placeholder="手机号" @blur="getIcon" v-model="value"></li>
         <li><input type="text" placeholder="验证码"></li>
         <div class="getcode-right">获取验证码</div>
         <li>
@@ -43,19 +43,20 @@
       return {
         msg: 'login',
         icon: 'https://avatar.csdn.net/6/D/3/3_riddle1981.jpg',
-        errorInfo: '这是个错误'
+        errorInfo: '用户名或密码错误',
+        value: '',
       }
     },
     methods: {
       getIcon: function () {
-        console.log(11111);
-        axios.get('http://www.fand.wang:8890/user/get_vcode', {
+        console.log(this.value);
+        axios.get('http://127.0.0.1:8080/static/getIconSucess.json', {
           params: {
-            phonenum:15735183194,
+            phonenum:this.value,
           }
         })
           .then(function (response) {
-            console.log(response.data)
+            console.log(response)
           })
           .catch(function (response) {
             console.log(response)
