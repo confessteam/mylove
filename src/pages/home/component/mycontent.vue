@@ -2,12 +2,14 @@
   <div class="container">
     <div class="column-4">
       <div class="unit">
-        <div id="top">
-          <img src="" alt="">
-        </div>
-        <div id="bottom"></div>
+
       </div>
-      <div class="unit">第一列 02</div>
+      <div class="unit">
+        <!--<div class="top">-->
+          <!--<img src="@/assets/ext_images/list.jpeg" alt="">-->
+        <!--</div>-->
+        <!--<div class="bottom"></div>-->
+      </div>
       <div class="unit">第一列 03</div>
       <div class="unit">第一列 03</div>
       <div class="unit">第一列 03</div>
@@ -19,7 +21,12 @@
     </div>
 
     <div class="column-4">
-      <div class="unit">第二列 01</div>
+      <div class="unit">
+        <div class="top">
+          <!--<img src="@/assets/ext_images/list.jpeg" alt="">-->
+        </div>
+        <div class="bottom"></div>
+      </div>
       <div class="unit">第二列 02</div>
       <div class="unit">第二列 02</div>
       <div class="unit">第二列 02</div>
@@ -95,11 +102,13 @@
     font-size: 0.4rem;
     border-radius: 0.2rem;
   }
-  #top{
+  .top{
     height: 4rem;
     background-color: indianred;
+    overflow-x: scroll;
+    overflow-y:  scroll;
   }
-  #bottom {
+  .bottom {
     height: 1rem;
     background-color: black;
   }
