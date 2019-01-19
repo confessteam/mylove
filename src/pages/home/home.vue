@@ -1,17 +1,18 @@
 <template>
-  <div id="hello">
-    {{msg}}
-    <div>
-        <tabbar></tabbar>
-    </div>
+  <div id="all">
+    <myheader></myheader>
+    <mycontent></mycontent>
+    <tabbar></tabbar>
   </div>
 </template>
 
 <script>
-  import Tabbar from '../common/tabbar.vue'
+  import tabbar from '../common/tabbar.vue';
+  import myheader from '../common/myheader.vue';
+  import mycontent from './component/mycontent.vue'
 
   export default {
-    components: {Tabbar},
+    components: {tabbar,myheader,mycontent},
     name: 'home',
     data () {
       return {
@@ -23,5 +24,8 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+#all{
+  padding-bottom: 1.1rem;
+  padding-top: 1.4rem;
+}
 </style>

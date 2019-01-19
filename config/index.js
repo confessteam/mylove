@@ -4,13 +4,22 @@
 
 const path = require('path')
 
+// var proxyConfig = require('./proxyConfig')
+
 module.exports = {
   dev: {
 
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      "/proxy":{
+        target: 'http://127.0.0.1:8000',
+        changeOrigin:true,
+        pathRewrite: {
+        '^/proxy': ''   //重写接口
+      }
+    }},
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -41,6 +50,8 @@ module.exports = {
     cacheBusting: true,
 
     cssSourceMap: true
+
+  //  自己定义，解决跨域问题
   },
 
   build: {

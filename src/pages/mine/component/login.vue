@@ -50,7 +50,7 @@
     methods: {
       getIcon: function () {
         console.log(this.value);
-        axios.get('http://127.0.0.1:8080/static/getIconSucess.json', {
+        axios.get('/proxy/user/get_vcode', {
           params: {
             phonenum:this.value,
           }

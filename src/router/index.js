@@ -6,6 +6,7 @@ import release from '@/pages/release/release'
 import aboutme from '@/pages/aboutme/aboutme'
 import care from '@/pages/care/care'
 import login from '@/pages/mine/component/login'
+import update from '@/pages/mine/component/update'
 
 Vue.use(Router)
 
@@ -35,6 +36,10 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: login
+    }, {
+      path: '/update',
+      name: 'update',
+      component: update
     }
   ]
 })
