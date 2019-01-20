@@ -3,7 +3,7 @@
     <div id="top">个人中心</div>
     <div id="icon">
       <div id="left">
-        <img :src="icon" alt="">
+        <img :src="icon"  alt="">
       </div>
       <div id="right">
         <p><img src="@/assets/headImage/user.png" alt="">樊丁</p>
@@ -11,9 +11,12 @@
       </div>
     </div>
     <div id="func">
-        <van-tabs v-model="active" swipeable>
-          <van-tab v-for="index in 4" :title="'选项 ' + index" :key = "index">
-            内容 {{ index }}
+        <van-tabs   v-model="active"  swipeable>
+          <van-tab   title="动态">
+            动态
+          </van-tab>
+          <van-tab  title="收藏">
+            收藏
           </van-tab>
         </van-tabs>
     </div>
@@ -37,7 +40,7 @@ export default {
     return {
       active: 0,
       msg: 'login',
-      icon: 'https://avatar.csdn.net/6/D/3/3_riddle1981.jpg'
+      icon: 'http://photo.tuchong.com/4067228/f/508035880.jpg'
     }
   },
   methods: {
@@ -73,24 +76,26 @@ export default {
 
   #icon {
     height: 1.5rem;
-    padding: 0.3rem;
+    padding: 0.2rem;
     border-bottom: solid 0.02rem gray;
   }
 
   #left {
     float: left;
-    width: 20%;
+    width: 30%;
   }
 
   #right {
     float: right;
-    width:80%;
+    width:70%;
   }
 
   #left img {
     display: inline-block;
     border-radius: 50%;
     width: 1.5rem;
+    height: 1.5rem;
+    padding-left: 0.1rem;
   }
 
   #right img {
