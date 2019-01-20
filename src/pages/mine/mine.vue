@@ -10,43 +10,53 @@
         <p><img src="@/assets/headImage/mynote.png" alt="">这就是我</p>
       </div>
     </div>
-    <div id="func"></div>
+    <div id="func">
+        <van-tabs v-model="active" swipeable>
+          <van-tab v-for="index in 4" :title="'选项 ' + index" :key = "index">
+            内容 {{ index }}
+          </van-tab>
+        </van-tabs>
+    </div>
 
   </div>
 </template>
 
 <script>
-  import { Button } from 'vant'
-  import axios from 'axios'
+import { Button } from 'vant'
+import { Tab, Tabs } from 'vant';
+import axios from 'axios'
 
-  export default {
-    components: {
-      [Button.name]: Button,
-    },
-    name: 'mine',
-    data () {
-      return {
-        msg: 'login',
-        icon: 'https://avatar.csdn.net/6/D/3/3_riddle1981.jpg',
-      }
-    },
-    methods: {
-      getIcon: function () {
-        console.log(this.value)
-        axios.get('http://www.fand.wang:8890/api/user/get_vcode', {
-          params: {
-            phonenum: this.value,
-          }
+export default {
+  components: {
+    [Button.name]: Button,
+    [Tab.name]: Tab,
+    [Tabs.name]: Tabs
+  },
+  name: 'mine',
+  data () {
+    return {
+      active: 0,
+      msg: 'login',
+      icon: 'https://avatar.csdn.net/6/D/3/3_riddle1981.jpg'
+    }
+  },
+  methods: {
+    getIcon: function () {
+      console.log(this.value)
+      axios.get('http://www.fand.wang:8890/api/user/get_vcode', {
+        params: {
+          phonenum: this.value
+        }
+      })
+        .then(function (response) {
+          console.log(response)
         })
-          .then(function (response) {
-            console.log(response)
-          })
-          .catch(function (response) {
-            console.log(response)
-          })
-      }
+        .catch(function (response) {
+          console.log(response)
+        })
     }
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -92,6 +102,5 @@
   #func {
     margin-top: 1rem;
     height: 4rem;
-    background-color: black;
   }
 </style>
