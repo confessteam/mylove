@@ -45,6 +45,7 @@
     position: fixed;
     top: 0px;
     left: 0px;
+    z-index: 9999;
   }
   #left{
     float: left;
