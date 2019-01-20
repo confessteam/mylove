@@ -3,50 +3,65 @@
     <div id="top">个人中心</div>
     <div id="icon">
       <div id="left">
-        <img :src="icon" alt="">
+        <img :src="icon"  alt="">
       </div>
       <div id="right">
         <p><img src="@/assets/headImage/user.png" alt="">樊丁</p>
         <p><img src="@/assets/headImage/mynote.png" alt="">这就是我</p>
       </div>
     </div>
-    <div id="func"></div>
-
+    <div id="func">
+        <van-tabs   v-model="active"  swipeable>
+          <van-tab   title="动态">
+            动态
+          </van-tab>
+          <van-tab  title="收藏">
+            收藏
+          </van-tab>
+        </van-tabs>
+    </div>
+    <tabbar></tabbar>
   </div>
 </template>
 
 <script>
-  import { Button } from 'vant'
-  import axios from 'axios'
+import { Button } from 'vant'
+import { Tab, Tabs } from 'vant';
+import tabbar from '../common/tabbar.vue';
+import axios from 'axios'
 
-  export default {
-    components: {
-      [Button.name]: Button,
-    },
-    name: 'mine',
-    data () {
-      return {
-        msg: 'login',
-        icon: 'https://avatar.csdn.net/6/D/3/3_riddle1981.jpg',
-      }
-    },
-    methods: {
-      getIcon: function () {
-        console.log(this.value)
-        axios.get('http://www.fand.wang:8890/api/user/get_vcode', {
-          params: {
-            phonenum: this.value,
-          }
+export default {
+  components: {
+    [Button.name]: Button,
+    [Tab.name]: Tab,
+    [Tabs.name]: Tabs,
+    tabbar
+  },
+  name: 'mine',
+  data () {
+    return {
+      active: 0,
+      msg: 'login',
+      icon: 'http://photo.tuchong.com/4067228/f/508035880.jpg'
+    }
+  },
+  methods: {
+    getIcon: function () {
+      console.log(this.value)
+      axios.get('http://www.fand.wang:8890/api/user/get_vcode', {
+        params: {
+          phonenum: this.value
+        }
+      })
+        .then(function (response) {
+          console.log(response)
         })
-          .then(function (response) {
-            console.log(response)
-          })
-          .catch(function (response) {
-            console.log(response)
-          })
-      }
+        .catch(function (response) {
+          console.log(response)
+        })
     }
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -63,24 +78,26 @@
 
   #icon {
     height: 1.5rem;
-    padding: 0.3rem;
+    padding: 0.2rem;
     border-bottom: solid 0.02rem gray;
   }
 
   #left {
     float: left;
-    width: 20%;
+    width: 30%;
   }
 
   #right {
     float: right;
-    width:80%;
+    width:70%;
   }
 
   #left img {
     display: inline-block;
     border-radius: 50%;
     width: 1.5rem;
+    height: 1.5rem;
+    padding-left: 0.1rem;
   }
 
   #right img {
@@ -92,6 +109,5 @@
   #func {
     margin-top: 1rem;
     height: 4rem;
-    background-color: black;
   }
 </style>
