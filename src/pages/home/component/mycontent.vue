@@ -10,10 +10,14 @@
       <div class="column-2">
         <div class="unit" v-for="itt in list">
           <div class="top">
-            <img src="@/assets/ext_images/list.jpeg" alt="" @click="showImagePreview">
+            <img src="@/assets/ext_images/changtu.jpeg" alt="" @click="showImagePreview">
           </div>
           <div class="bottom">
-
+            <ul>
+              <li><van-icon name="star"   color="#EC9D87" class="myicon"/><span> 15</span></li>
+              <li><van-icon name="comment"   color="#EC9D87" class="myicon"/><span> 13</span></li>
+              <li><van-icon name="more"    color="#EC9D87" class="myicon"/></li>
+            </ul>
           </div>
         </div>
 
@@ -24,7 +28,11 @@
             <img src="@/assets/ext_images/list.jpeg" alt="" @click="showImagePreview">
           </div>
           <div class="bottom">
-                1213213132
+            <ul>
+              <li><van-icon name="star"   color="#EC9D87" class="myicon"/><span> 15</span></li>
+              <li><van-icon name="comment"   color="#EC9D87" class="myicon"/><span> 13</span></li>
+              <li><van-icon name="more"    color="#EC9D87" class="myicon"/></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -37,18 +45,18 @@
 
 <script>
 
-  import { Button, List, Cell, CellGroup, ImagePreview } from 'vant'
+  import { Icon, List, Cell, CellGroup, ImagePreview } from 'vant'
   import axios from 'axios'
 
   const images = [
-    'https://img.yzcdn.cn/public_files/2017/09/05/3bd347e44233a868c99cf0fe560232be.jpg',
+    'http://192.168.0.107:8080/static/img/changtu.308b78b.jpeg',
     'https://img.yzcdn.cn/public_files/2017/09/05/c0dab461920687911536621b345a0bc9.jpg',
     'https://img.yzcdn.cn/public_files/2017/09/05/4e3ea0898b1c2c416eec8c11c5360833.jpg',
     'https://img.yzcdn.cn/public_files/2017/09/05/fd08f07665ed67d50e11b32a21ce0682.jpg'
   ]
   export default {
     components: {
-      [Button.name]: Button,
+      [Icon.name]: Icon,
       [List.name]: List,
       [Cell.name]: Cell,
       [CellGroup.name]: CellGroup,
@@ -117,32 +125,36 @@
 
   .unit {
     width: 95%;
-    height: 5rem;
+    /*height: 5rem;*/
     border: 0.02rem solid #DDDDDD;
     margin: 0.1rem auto;
-    text-align: center;
-    line-height: 4rem;
     font-weight: bold;
-    font-size: 0.4rem;
+    font-size: 0.32rem;
     border-radius: 0.2rem;
   }
 
   .top {
     width: 100%;
-    height: 4rem;
+    /*height: 4rem;*/
     overflow: hidden;
+    max-height: 4rem;
   }
 
   .bottom {
     width: 100%;
     height: 1rem;
     border-radius: 0.02rem;
-    /*background-color: black;*/
   }
 
+  li{
+    float: left;
+    line-height: 1.1rem;
+    width: 33%;
+    text-align: center;
+  }
   .top img {
     width: 100%;
-    height: 4rem;
     border-radius: 0.02rem;
   }
+
 </style>

@@ -1,40 +1,31 @@
 <template>
-  <div id="hello">
-    <van-tabbar v-model="active" active-color="#07c160">
-      <van-tabbar-item  icon="fire" info="4">
-        <router-link to="/">首页</router-link>
-      </van-tabbar-item>
-      <van-tabbar-item icon="like">关注</van-tabbar-item>
-      <van-tabbar-item icon="add">发布</van-tabbar-item>
-      <van-tabbar-item icon="comment">消息</van-tabbar-item>
-      <van-tabbar-item icon="friends">
-          <router-link to="mine">我的</router-link>
-      </van-tabbar-item>
-    </van-tabbar>
-  </div>
+  <van-tabbar v-model="active" active-color="#07c160">
+    <van-tabbar-item icon="fire" info="4" to="/" >首页</van-tabbar-item>
+    <van-tabbar-item icon="like" to="care">关注</van-tabbar-item>
+    <van-tabbar-item icon="add" to="release">表白</van-tabbar-item>
+    <van-tabbar-item icon="comment" to="aboutme">消息</van-tabbar-item>
+    <van-tabbar-item icon="friends" to="mine">我的</van-tabbar-item>
+  </van-tabbar>
 </template>
 
 <script>
-import { Icon } from 'vant'
-import { Tabbar, TabbarItem } from 'vant';
-import axios from 'axios'
-export default {
-  components: {
-    [Icon.name]: Icon,
-    [Tabbar.name]: Tabbar,
-    [TabbarItem.name]: TabbarItem
-  },
-  name: 'tabbar',
-  data () {
-    return {
-      active: 0,
-      icon: {
-        normal: '//img.yzcdn.cn/icon-normal.png',
-        active: '//img.yzcdn.cn/icon-active.png'
+  import { Icon } from 'vant';
+  import { Tabbar, TabbarItem } from 'vant';
+  import axios from 'axios';
+
+  export default {
+    components: {
+      [Icon.name]: Icon,
+      [Tabbar.name]: Tabbar,
+      [TabbarItem.name]: TabbarItem
+    },
+    name: 'tabbar',
+    data () {
+      return {
+        active: 0,
       }
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
