@@ -1,6 +1,10 @@
 <template>
   <div id="all">
-    <div id="top">个人中心</div>
+    <div id="top">
+        <router-link :to="{path:'updUserInfo',query: {id: 1}}">
+          <van-button id="edit" size="small" type="danger" @click="editInfo">编辑资料</van-button>
+        </router-link>
+    </div>
     <div id="icon">
       <div id="left">
         <img :src="icon"  alt="">
@@ -29,7 +33,6 @@ import { Button } from 'vant'
 import { Tab, Tabs } from 'vant';
 import tabbar from '../common/tabbar.vue';
 import axios from 'axios'
-
 export default {
   components: {
     [Button.name]: Button,
@@ -75,7 +78,9 @@ export default {
     font-size: 0.46rem;
 
   }
-
+  #edit {
+   margin-left: 5rem;
+  }
   #icon {
     height: 1.5rem;
     padding: 0.2rem;
