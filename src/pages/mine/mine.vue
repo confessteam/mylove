@@ -20,20 +20,22 @@
           </van-tab>
         </van-tabs>
     </div>
-
+    <tabbar></tabbar>
   </div>
 </template>
 
 <script>
 import { Button } from 'vant'
 import { Tab, Tabs } from 'vant';
+import tabbar from '../common/tabbar.vue';
 import axios from 'axios'
 
 export default {
   components: {
     [Button.name]: Button,
     [Tab.name]: Tab,
-    [Tabs.name]: Tabs
+    [Tabs.name]: Tabs,
+    tabbar
   },
   name: 'mine',
   data () {
