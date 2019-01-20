@@ -2,7 +2,7 @@
   <div id="hello">
     <van-tabbar v-model="active" active-color="#07c160">
       <van-tabbar-item  icon="fire" info="4">
-        首页
+        <router-link to="/">首页</router-link>
       </van-tabbar-item>
       <van-tabbar-item icon="like">关注</van-tabbar-item>
       <van-tabbar-item icon="add">发布</van-tabbar-item>
