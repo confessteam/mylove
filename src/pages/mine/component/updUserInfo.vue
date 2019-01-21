@@ -1,15 +1,49 @@
 <template>
     <div id="all">
+      <van-nav-bar
+        title="个人资料"
+        right-text="保存"
+        left-arrow
+        @click-left="onClickLeft"
+        @click-right="onClickRight"
+      />
       <div id="user_info_top">
-        <div class="uploadImg">
-        <van-uploader :after-read="onRead">
+        <div class="uploadImg" v-if='!dwimg'>
+        <van-uploader :after-read="onRead" >
           <van-icon name="photograph" />
         </van-uploader>
         </div>
+        {{dwimg}}
+          <p class="img" v-if="dwimg" ><img class="head-img" src="" ref="goodsImg"/></p>
       </div>
       <div id="user_info_content">
         <div class="content">
-
+          <div>
+            <van-cell-group>
+              <van-field v-model="value" placeholder="请输入昵称" />
+            </van-cell-group>
+          </div>
+          <div>
+            <van-cell-group>
+              <van-field v-model="value" placeholder="请输入签名" />
+            </van-cell-group>
+          </div>
+          <div>
+            <van-radio-group v-model="radio">
+              <van-radio name="1">男</van-radio>
+              <van-radio name="2">女</van-radio>
+              <van-radio name="0">不显示</van-radio>
+            </van-radio-group>
+          </div>
+          <div>
+            <van-popup v-model="show"  position="bottom" :overlay="false">
+                  <van-datetime-picker
+                  v-model="currentDate"
+                  type="date"
+                  :min-date="minDate"
+                />
+              </van-popup>
+          </div>
         </div>
       </div>
     </div>
@@ -17,17 +51,29 @@
 
 <script>
 import { Uploader,icon } from 'vant';
+import { Field } from 'vant';
+import { RadioGroup, Radio } from 'vant';
+import { DatetimePicker } from 'vant';
+import { Popup } from 'vant';
+import { NavBar } from 'vant';
 import axios from 'axios'
 
 export default {
   components: {
     [Uploader.name]: Uploader,
+    [DatetimePicker.name]: DatetimePicker,
+    [Popup.name]: Popup,
+    [Radio.name]: Radio,
+    [RadioGroup.name]: RadioGroup,
+    [Field.name]: Field,
+    [NavBar.name]: NavBar,
     [icon.name]: icon
   },
   name: 'updUserInfo',
   data () {
     return {
-      show: true
+      show: false,
+      currentDate: new Date(),
 
     }
   },
@@ -47,7 +93,7 @@ export default {
         })
     },
     onRead: function (file) {
-      console.log(file)
+      this.dwimg = file.content
     }
   }
 }
