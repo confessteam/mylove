@@ -8,14 +8,15 @@
     <div class="container">
 
       <div class="column-2">
-        <div class="unit" v-for="itt in list">
+        <div class="unit "v-for="img1 in this.image1_list">
           <div class="top">
-            <img src="@/assets/ext_images/changtu.jpeg" alt="" @click="showImagePreview">
+            <img :src="img1" alt="" @click="showImagePreview">
+            <!--<img src="http://a2.qpic.cn/psb?/V12bjHIg352Dl2/FvAgXAxGj1HwK.NIsdtWYy.nrgTJy*0tg0iNepRhYzs!/c/dBEAAAAAAAAA&ek=1&kp=1&pt=0&bo=kgNsA5IDbAMRECc!&t=5&tl=3&vuin=2094531487&tm=1548144000&sce=60-2-2&rf=0-0" alt="" @click="showImagePreview">-->
           </div>
           <div class="bottom">
             <ul>
-              <li><van-icon name="star"   color="#EC9D87" class="myicon"/><span> 15</span></li>
-              <li><van-icon name="comment"   color="#EC9D87" class="myicon"/><span> 13</span></li>
+              <li><van-icon name="star"   color="#EC9D87" class="myicon"/><span> {{zan}}</span></li>
+              <li><van-icon name="comment"   color="#EC9D87" class="myicon"/><span> {{comment}}</span></li>
               <li><van-icon name="more"    color="#EC9D87" class="myicon"/></li>
             </ul>
           </div>
@@ -23,9 +24,9 @@
 
       </div>
       <div class="column-2">
-        <div class="unit" v-for="itt in list">
+        <div class="unit" v-for="img2 in this.image2_list">
           <div class="top">
-            <img src="@/assets/ext_images/list.jpeg" alt="" @click="showImagePreview">
+            <img :src="img2" alt="" @click="showImagePreview">
           </div>
           <div class="bottom">
             <ul>
@@ -63,15 +64,19 @@
       [ImagePreview.name]: ImagePreview,
     },
     name: 'mycontent',
+    props:{
+        image1_list: Array,
+        image2_list: Array,
+    },
     data () {
       return {
-        list: [41, 1, 1, 1, 1, 1, 1, 1, 1, , 1, 11, 1, 1, , 1, 1, 1, 1, 1, 1, 11, 1, 1, 1, 11, 1, 1, 1, 1, 1],
         loading: false,
         finished: false,
+        zan: 15,
+        comment: 20,
       }
     },
     methods: {
-      getIcon: function () {},
       onLoad () {
         // 异步更新数据
         setTimeout(() => {
@@ -137,7 +142,7 @@
     width: 100%;
     /*height: 4rem;*/
     overflow: hidden;
-    max-height: 4rem;
+    max-height: 15rem;
   }
 
   .bottom {
@@ -154,7 +159,7 @@
   }
   .top img {
     width: 100%;
-    border-radius: 0.02rem;
+    border-radius: 0.2rem;
   }
 
 </style>
