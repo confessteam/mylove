@@ -10,7 +10,7 @@
       <div class="column-2">
         <div class="unit "v-for="img1 in this.image1_list">
           <div class="top">
-            <img :src="img1" alt="" @click="showImagePreview">
+            <img :src="img1[0]" alt="" @click="showImagePreview(($event))" :images="img1">
             <!--<img src="http://a2.qpic.cn/psb?/V12bjHIg352Dl2/FvAgXAxGj1HwK.NIsdtWYy.nrgTJy*0tg0iNepRhYzs!/c/dBEAAAAAAAAA&ek=1&kp=1&pt=0&bo=kgNsA5IDbAMRECc!&t=5&tl=3&vuin=2094531487&tm=1548144000&sce=60-2-2&rf=0-0" alt="" @click="showImagePreview">-->
           </div>
           <div class="bottom">
@@ -26,7 +26,7 @@
       <div class="column-2">
         <div class="unit" v-for="img2 in this.image2_list">
           <div class="top">
-            <img :src="img2" alt="" @click="showImagePreview">
+            <img :src="img2[0]" alt="" @click="showImagePreview($event)" :images="img2">
           </div>
           <div class="bottom">
             <ul>
@@ -38,8 +38,6 @@
         </div>
       </div>
     </div>
-
-
   </van-list>
 
 </template>
@@ -49,12 +47,6 @@
   import { Icon, List, Cell, CellGroup, ImagePreview } from 'vant'
   import axios from 'axios'
 
-  const images = [
-    'http://192.168.0.107:8080/static/img/changtu.308b78b.jpeg',
-    'https://img.yzcdn.cn/public_files/2017/09/05/c0dab461920687911536621b345a0bc9.jpg',
-    'https://img.yzcdn.cn/public_files/2017/09/05/4e3ea0898b1c2c416eec8c11c5360833.jpg',
-    'https://img.yzcdn.cn/public_files/2017/09/05/fd08f07665ed67d50e11b32a21ce0682.jpg'
-  ]
   export default {
     components: {
       [Icon.name]: Icon,
@@ -92,22 +84,13 @@
           }
         }, 500)
       },
+      showImagePreview(images) {
+        var s = images.target.attributes.images.nodeValue;
+        ImagePreview(s.split(','));
+      }
 
-      showImagePreview: function (position, timer) {
-        const instance = ImagePreview({
-          images,
-          asyncClose: !!timer,
-          startPosition: typeof position === 'number' ? position : 0
-        })
-        if (timer) {
-          setTimeout(() => {
-            instance.close()
-          }, timer)
-        }
-      },
     }
-
-  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

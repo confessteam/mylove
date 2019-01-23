@@ -27,7 +27,6 @@
       this.$api.get('user/index', null, r => {
           this.image1_list = r.data.image1_list;
           this.image2_list = r.data.image2_list;
-
       })
     },
 
