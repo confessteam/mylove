@@ -10,11 +10,10 @@
       <div id="user_info_top">
         <div class="uploadImg" v-if='!dwimg'>
         <van-uploader :after-read="onRead" >
-          <van-icon name="photograph" />
+          <van-icon name="photograph" v-if="isShowPhotoGraph"/>
+          <img class='head-img'  ref='goodsImg'/>
         </van-uploader>
         </div>
-        {{dwimg}}
-          <p class="img" v-if="dwimg" ><img class="head-img" src="" ref="goodsImg"/></p>
       </div>
       <div id="user_info_content">
         <div class="content">
@@ -57,7 +56,6 @@ import { DatetimePicker } from 'vant';
 import { Popup } from 'vant';
 import { NavBar } from 'vant';
 import axios from 'axios'
-
 export default {
   components: {
     [Uploader.name]: Uploader,
@@ -77,7 +75,14 @@ export default {
 
     }
   },
+  created: function () {
+    this.initUserInfo()
+  },
   methods: {
+    initUserInfo: function () {
+
+      console.log(123)
+    },
     getIcon: function () {
       console.log(this.value);
       axios.get('http://www.fand.wang:8890/api/user/get_vcode', {
@@ -93,7 +98,7 @@ export default {
         })
     },
     onRead: function (file) {
-      this.dwimg = file.content
+      this.$refs.goodsImg.src = file.content;
     }
   }
 }
