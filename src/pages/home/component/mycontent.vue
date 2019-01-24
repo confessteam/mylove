@@ -8,16 +8,22 @@
     <div class="container">
 
       <div class="column-2">
-        <div class="unit "v-for="img1 in this.image1_list">
+        <div class="unit " v-for="img1 in this.image1_list">
           <div class="top">
             <img :src="img1[0]" alt="" @click="showImagePreview(($event))" :images="img1">
             <!--<img src="http://a2.qpic.cn/psb?/V12bjHIg352Dl2/FvAgXAxGj1HwK.NIsdtWYy.nrgTJy*0tg0iNepRhYzs!/c/dBEAAAAAAAAA&ek=1&kp=1&pt=0&bo=kgNsA5IDbAMRECc!&t=5&tl=3&vuin=2094531487&tm=1548144000&sce=60-2-2&rf=0-0" alt="" @click="showImagePreview">-->
           </div>
           <div class="bottom">
             <ul>
-              <li><van-icon name="star"   color="#EC9D87" class="myicon"/><span> {{zan}}</span></li>
-              <li><van-icon name="comment"   color="#EC9D87" class="myicon"/><span> {{comment}}</span></li>
-              <li><van-icon name="more"    color="#EC9D87" class="myicon"/></li>
+              <li>
+                <van-icon name="star" color="#EC9D87" class="myicon"/>
+                <span> {{zan}}</span></li>
+              <li>
+                <van-icon name="comment" color="#EC9D87" class="myicon"/>
+                <span> {{comment}}</span></li>
+              <li>
+                <van-icon name="more" color="#EC9D87" class="myicon"/>
+              </li>
             </ul>
           </div>
         </div>
@@ -30,9 +36,15 @@
           </div>
           <div class="bottom">
             <ul>
-              <li><van-icon name="star"   color="#EC9D87" class="myicon"/><span> 15</span></li>
-              <li><van-icon name="comment"   color="#EC9D87" class="myicon"/><span> 13</span></li>
-              <li><van-icon name="more"    color="#EC9D87" class="myicon"/></li>
+              <li>
+                <van-icon name="star" color="#EC9D87" class="myicon"/>
+                <span> 15</span></li>
+              <li>
+                <van-icon name="comment" color="#EC9D87" class="myicon"/>
+                <span> 13</span></li>
+              <li>
+                <van-icon name="more" color="#EC9D87" class="myicon"/>
+              </li>
             </ul>
           </div>
         </div>
@@ -45,7 +57,6 @@
 <script>
 
   import { Icon, List, Cell, CellGroup, ImagePreview } from 'vant'
-  import axios from 'axios'
 
   export default {
     components: {
@@ -56,9 +67,9 @@
       [ImagePreview.name]: ImagePreview,
     },
     name: 'mycontent',
-    props:{
-        image1_list: Array,
-        image2_list: Array,
+    props: {
+      image1_list: Array,
+      image2_list: Array,
     },
     data () {
       return {
@@ -66,31 +77,42 @@
         finished: false,
         zan: 15,
         comment: 20,
+        endPage: 10,
       }
     },
     methods: {
       onLoad () {
         // 异步更新数据
         setTimeout(() => {
-          for (let i = 0; i < 10; i++) {
-            this.list.push(this.list.length + 1)
-          }
-          // 加载状态结束
-          this.loading = false
+          this.$api.get('user/index', {
+            start: this.endPage,
+            step: this.endPage + 10
+          }, r => {
+            console.log(r.code)
+            console.log('123')
+            this.image1_list = this.image1_list.concat(r.data.image1_list)
+            this.image2_list = this.image2_list.concat(r.data.image2_list)
+            this.endPage = this.endPage + 10
+            // 加载状态结束
+            this.loading = false
+            if (r.code == 4006){
+              this.finished = true
+            }
+          })
 
-          // 数据全部加载完成
-          if (this.list.length >= 30) {
-            this.finished = true
-          }
+          //              数据全部加载完成
+
         }, 500)
+
       },
-      showImagePreview(images) {
-        var s = images.target.attributes.images.nodeValue;
-        ImagePreview(s.split(','));
+
+      showImagePreview (images) {
+        var s = images.target.attributes.images.nodeValue
+        ImagePreview(s.split(','))
       }
 
     }
-}
+  }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -125,7 +147,7 @@
     width: 100%;
     /*height: 4rem;*/
     overflow: hidden;
-    max-height: 15rem;
+    max-height: 8rem;
   }
 
   .bottom {
@@ -134,12 +156,13 @@
     border-radius: 0.02rem;
   }
 
-  li{
+  li {
     float: left;
     line-height: 1.1rem;
     width: 33%;
     text-align: center;
   }
+
   .top img {
     width: 100%;
     border-radius: 0.2rem;
