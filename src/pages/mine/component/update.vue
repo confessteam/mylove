@@ -7,37 +7,37 @@
 </template>
 
 <script>
-  import { Popup } from 'vant'
-  import axios from 'axios'
+import { Popup } from 'vant'
+import axios from 'axios'
 
-  export default {
-    components: {
-      [Popup.name]: Popup,
-    },
-    name: 'update',
-    data () {
-      return {
-        show: true,
+export default {
+  components: {
+    [Popup.name]: Popup
+  },
+  name: 'update',
+  data () {
+    return {
+      show: true,
 
-      }
-    },
-    methods: {
-      getIcon: function () {
-        console.log(this.value);
-        axios.get('http://www.fand.wang:8890/api/user/get_vcode', {
-          params: {
-            phonenum: this.value,
-          }
+    }
+  },
+  methods: {
+    getIcon: function () {
+      console.log(this.value);
+      axios.get('http://www.fand.wang:8890/api/user/get_vcode', {
+        params: {
+          phonenum: this.value
+        }
+      })
+        .then(function (response) {
+          console.log(response)
         })
-          .then(function (response) {
-            console.log(response)
-          })
-          .catch(function (response) {
-            console.log(response)
-          })
-      }
+        .catch(function (response) {
+          console.log(response)
+        })
     }
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
