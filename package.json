@@ -5,7 +5,7 @@
   "author": "fanfanstl <2094531487@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.0.107",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 192.168.0.108",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js"
@@ -16,6 +16,7 @@
     "stylus": "^0.54.5",
     "vant": "^1.5.2",
     "vue": "^2.5.2",
+    "vue-core-image-upload": "^2.4.11",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

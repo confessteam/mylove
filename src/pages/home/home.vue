@@ -10,7 +10,6 @@
   import tabbar from '../common/tabbar.vue'
   import myheader from '../common/myheader.vue'
   import mycontent from './component/mycontent.vue'
-  import axios from 'axios'
 
   export default {
     components: {tabbar, myheader, mycontent},
