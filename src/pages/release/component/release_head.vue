@@ -1,22 +1,32 @@
 <template>
   <div id="header">
     <div id="left"><img src="@/assets/ext_images/back.png" alt=""></div>
-    <div id="right"><van-button type="primary" round="true" size="small">发布</van-button></div>
+    <div id="right">
+      <van-button type="primary" round="true" size="small">发布</van-button>
+    </div>
   </div>
 </template>
 
 <script>
-  import { Button } from 'vant'
+  import { Button, Uploader } from 'vant'
+
   export default {
     name: 'releaseHead',
     components: {
-      [Button.name]:Button,
+      [Button.name]: Button,
+      [Uploader.name]: Uploader,
     },
     data () {
-      return {}
+
     },
-    methods: {},
+    methods: {
+      onRead (file) {
+        console.log(file)
+      }
+    }
   }
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
