@@ -135,7 +135,6 @@
 
   .unit {
     width: 95%;
-    /*height: 5rem;*/
     border: 0.02rem solid #DDDDDD;
     margin: 0.1rem auto;
     font-weight: bold;
