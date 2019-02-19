@@ -1,23 +1,31 @@
 <template>
     <div id="all">
       <myheader></myheader>
-      <carecomment></carecomment>
+      <div>
+        {{msg}}
+      </div>
       <tabbar></tabbar>
     </div>
 </template>
 
 <script>
-  import tabbar from '../common/tabbar.vue'
-  import myheader from '../common/myheader.vue'
-  import carecomment from './component/carecomment.vue'
+  import { Button } from 'vant'
+  import myheader from './myheader.vue'
+  import tabbar from './tabbar.vue'
+
   export default {
-    components:{tabbar,myheader,carecomment},
-    name: 'home',
+    components: {
+      [Button.name]: Button,
+      myheader,
+      tabbar
+    },
+    name: 'detail',
     data () {
       return {
-        msg: 'care'
+        msg: '详情页',
       }
-    }
+    },
+    methods: {}
   }
 </script>
 

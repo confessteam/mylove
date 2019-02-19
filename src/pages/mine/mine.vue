@@ -1,13 +1,9 @@
 <template>
   <div id="all">
-    <div id="top">
-        <router-link :to="{path:'updUserInfo',query: {id: 1}}">
-          <van-button id="edit" size="small" type="danger" @click="editInfo">编辑资料</van-button>
-        </router-link>
-    </div>
+    <myheader></myheader>
     <div id="icon">
       <div id="left">
-        <img :src="icon"  alt="">
+        <img src="@/assets/headImage/mynote.png" alt="">
       </div>
       <div id="right">
         <p><img src="@/assets/headImage/user.png" alt="">樊丁</p>
@@ -15,72 +11,70 @@
       </div>
     </div>
     <div id="func">
-        <van-tabs   v-model="active"  swipeable>
-          <van-tab   title="动态">
-            动态
-          </van-tab>
-          <van-tab  title="收藏">
-            收藏
-          </van-tab>
-        </van-tabs>
+      <van-tabs v-model="active" animated style="z-index: 0">
+        <van-tab title="动态">
+          <mycontent></mycontent>
+          动态
+        </van-tab>
+        <van-tab title="收藏">
+          <mycontent></mycontent>
+          收藏
+        </van-tab>
+      </van-tabs>
     </div>
     <tabbar></tabbar>
   </div>
 </template>
 
 <script>
-import { Button } from 'vant'
-import { Tab, Tabs } from 'vant';
-import tabbar from '../common/tabbar.vue';
-import axios from 'axios'
-export default {
-  components: {
-    [Button.name]: Button,
-    [Tab.name]: Tab,
-    [Tabs.name]: Tabs,
-    tabbar
-  },
-  name: 'mine',
-  data () {
-    return {
-      active: 0,
-      msg: 'login',
-      icon: 'http://photo.tuchong.com/4067228/f/508035880.jpg'
-    }
-  },
-  methods: {
-    getIcon: function () {
-      console.log(this.value)
-      axios.get('http://www.fand.wang:8890/api/user/get_vcode', {
-        params: {
-          phonenum: this.value
-        }
-      })
-        .then(function (response) {
-          console.log(response)
+  import { Button } from 'vant'
+  import { Tab, Tabs } from 'vant'
+  import tabbar from '../common/tabbar.vue'
+  import myheader from '../common/myheader.vue'
+  import mycontent from '../home/component/mycontent.vue'
+
+  export default {
+    components: {
+      [Button.name]: Button,
+      [Tab.name]: Tab,
+      [Tabs.name]: Tabs,
+      tabbar,
+      myheader,
+      mycontent
+    },
+    name: 'mine',
+    data () {
+      return {
+        active: 0,
+        icon:'@/assets/headImage/mynote.png'
+      }
+    },
+    methods: {
+      getIcon: function () {
+        console.log(this.value)
+        axios.get('http://www.fand.wang:8890/api/user/get_vcode', {
+          params: {
+            phonenum: this.value
+          }
         })
-        .catch(function (response) {
-          console.log(response)
-        })
+          .then(function (response) {
+            console.log(response)
+          })
+          .catch(function (response) {
+            console.log(response)
+          })
+      }
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  #top {
-    height: 1.5rem;
-    background-color: #34D68D;
-    line-height: 1.5rem;
-    text-align: center;
-    color: #F1F0EE;
-    font-size: 0.46rem;
+  #all {
+    padding-bottom: 1.1rem;
+    padding-top: 1.4rem;
+  }
 
-  }
-  #edit {
-   margin-left: 5rem;
-  }
   #icon {
     height: 1.5rem;
     padding: 0.2rem;
@@ -94,7 +88,7 @@ export default {
 
   #right {
     float: right;
-    width:70%;
+    width: 70%;
   }
 
   #left img {
@@ -112,7 +106,7 @@ export default {
   }
 
   #func {
-    margin-top: 1rem;
+    margin-top: 0.1rem;
     height: 4rem;
   }
 </style>

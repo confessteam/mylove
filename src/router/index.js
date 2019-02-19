@@ -8,6 +8,7 @@ import care from '@/pages/care/care'
 import login from '@/pages/mine/component/login'
 import update from '@/pages/mine/component/update'
 import updUserInfo from '@/pages/mine/component/updUserInfo'
+import detail from '@/pages/common/detail'
 
 Vue.use(Router)
 
@@ -45,6 +46,10 @@ export default new Router({
       path: '/updUserInfo',
       name: 'updUserInfo',
       component: updUserInfo
+    }, {
+      path: '/detail',
+      name: 'detail',
+      component: detail
     }
   ]
 })
