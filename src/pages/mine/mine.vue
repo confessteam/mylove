@@ -13,11 +13,11 @@
     <div id="func">
       <van-tabs v-model="active" animated style="z-index: 0">
         <van-tab title="动态">
-          <mycontent></mycontent>
+          <mycontent :image1_list="image1_list" :image2_list="image2_list"></mycontent>
           动态
         </van-tab>
         <van-tab title="收藏">
-          <mycontent></mycontent>
+          <mycontent :image1_list="image1_list" :image2_list="image2_list"></mycontent>
           收藏
         </van-tab>
       </van-tabs>
@@ -46,7 +46,9 @@
     data () {
       return {
         active: 0,
-        icon:'@/assets/headImage/mynote.png'
+        icon:'@/assets/headImage/mynote.png',
+        image1_list:[],
+        image2_list:[]
       }
     },
     methods: {
@@ -64,6 +66,21 @@
             console.log(response)
           })
       }
+    },
+    mounted:function () {
+      //      请求首页数据
+      this.$ajax.get('/api/proxy/user/index')
+        .then(response => {
+          console.log(response)
+          this.image1_list = response.data.data.image1_list
+          this.image2_list = response.data.data.image2_list
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => this.loading = false)
+
     }
   }
 </script>

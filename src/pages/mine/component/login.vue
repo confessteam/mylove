@@ -1,14 +1,7 @@
 <template>
-  <div id="hello">
+  <div id="all">
     <!--头部-->
-    <div id="top">
-      <div class="left iconfont back">
-        <a href="#">&#xe624;</a>
-      </div>
-      <div class="right">
-        Singn In
-      </div>
-    </div>
+    <myheader></myheader>
 
     <!--头像-->
     <div id="icon">
@@ -16,43 +9,56 @@
     </div>
 
     <!--表单-->
-    <form action="#" id="form">
-      <ul>
-        <span v-text="errorInfo" class="error"></span>
-        <li><input type="text" placeholder="手机号" @blur="getIcon" v-model="value"></li>
-        <li><input type="text" placeholder="验证码"></li>
-        <div class="getcode-right">获取验证码</div>
-        <li>
-          <button class="submit">登录</button>
-        </li>
-      </ul>
-    </form>
+    <van-cell-group>
+      <van-field
+        v-model="sms"
+        center
+        clearable
+        label="手机号"
+        placeholder="请输入手机号"
+      >
+      </van-field>
+      <van-field
+        v-model="sms"
+        center
+        clearable
+        label="验证码"
+        placeholder="请输入短信验证码"
+      >
+        <van-button slot="button" size="small" type="primary">发送验证码</van-button>
+      </van-field>
+      <van-button type="primary" size="large">登录</van-button>
+    </van-cell-group>
+    <tabbar></tabbar>
+
   </div>
 </template>
 
 <script>
-  import { Button } from 'vant'
-  import axios from 'axios'
+  import { Button, Field } from 'vant'
+  import myheader from '../../common/myheader.vue'
+  import tabbar from '../../common/tabbar.vue'
 
   export default {
     components: {
       [Button.name]: Button,
+      myheader,
+      tabbar,
+      [Field.name]: Field
     },
     name: 'home',
     data () {
       return {
-        msg: 'login',
-        icon: 'https://avatar.csdn.net/6/D/3/3_riddle1981.jpg',
-        errorInfo: '用户名或密码错误',
+        icon: 'https://ss1.bdstatic.com/5aAHeD3nKgcUp2HgoI7O1ygwehsv/media/ch1000/png/pc215.png',
         value: '',
       }
     },
     methods: {
       getIcon: function () {
-        console.log(this.value);
+        console.log(this.value)
         axios.get('/proxy/user/get_vcode', {
           params: {
-            phonenum:this.value,
+            phonenum: this.value,
           }
         })
           .then(function (response) {
@@ -68,25 +74,11 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  #top {
-    height: 1rem;
-    margin-top: 0.2rem;
-    padding: 0.1rem;
-    font-size: 0.5rem;
-  }
-
-  #top .left {
-    float: left;
-    width: 20%;
-    font-size: 0.5rem;
-    text-align: center;
-  }
-
-  #top .right {
-    float: right;
-    text-align: center;
-    width: 80%;
-    font-size: 0.66rem;
+  #all {
+    padding-bottom: 1.1rem;
+    padding-top: 1.4rem;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
   }
 
   #icon {
@@ -98,44 +90,7 @@
   #icon img {
     display: inline-block;
     border-radius: 50%;
-    width: 2.3rem;
-  }
-
-  #form {
-    margin-top: 1rem;
-    font-size: 0.50rem;
-
-  }
-
-  #form input {
-    height: 1.8rem;
-    width: 100%;
-    border: solid 0.02rem gray;
-  }
-
-  .getcode-right {
-    float: right;
-    height: 1rem;
-    font-size: 0.40rem;
-    background-color: indianred;
-    text-align: center;
-    line-height: 1rem;
-    border-radius: 10%;
-    margin-top: 0.1rem;
-    width: 2.5rem;
-  }
-
-  .submit {
-    margin-top: 0.5rem;
-    width: 100%;
-    height: 1.8rem;
-    font-size: 0.46rem;
-    background-color: #EB8F81;
-    border-radius: 0.2rem;
-  }
-
-  .error{
-    color: red;
-    font-size: 0.3rem;
+    width: 2rem;
+    height: 2rem;
   }
 </style>

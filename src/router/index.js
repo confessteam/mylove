@@ -50,6 +50,10 @@ export default new Router({
       path: '/detail',
       name: 'detail',
       component: detail
+    }, {
+      path: '/login',
+      name: 'login',
+      component: login
     }
   ]
 })

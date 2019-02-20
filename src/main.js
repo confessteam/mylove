@@ -7,9 +7,12 @@ import './assets/styles/reset.css'
 import './assets/styles/border.css'
 import fastClick from 'fastclick'
 import iconfont from './assets/styles/iconfont.css'
-import api from './api/index.js'
+// import api from './api/index.js'
+import axios from 'axios'
 
-Vue.prototype.$api = api
+
+// Vue.prototype.$api = api
+Vue.prototype.$ajax = axios
 
 Vue.config.productionTip = false
 fastClick.attach(document.body)

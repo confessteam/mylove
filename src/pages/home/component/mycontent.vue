@@ -84,25 +84,47 @@
       onLoad () {
         // 异步更新数据
         setTimeout(() => {
-          this.$api.get('user/index', {
-            start: this.endPage,
-            step: this.endPage + 10
-          }, r => {
-            console.log(r.code)
-            console.log('123')
-            this.image1_list = this.image1_list.concat(r.data.image1_list)
-            this.image2_list = this.image2_list.concat(r.data.image2_list)
-            this.endPage = this.endPage + 10
-            // 加载状态结束
-            this.loading = false
-            if (r.code == 4006){
-              this.finished = true
-            }
-          })
+//          this.$api.get('user/index', {
+//            start: this.endPage,
+//            step: this.endPage + 10
+//          }, r => {
+//            console.log(r.code)
+//            console.log('123')
+//            this.image1_list = this.image1_list.concat(r.data.image1_list)
+//            this.image2_list = this.image2_list.concat(r.data.image2_list)
+//            this.endPage = this.endPage + 10
+//            // 加载状态结束
+//            this.loading = false
+//            if (r.code == 4006) {
+//              this.finished = true
+//            }
+//          })
 
-          //              数据全部加载完成
+//          axios使用
 
-        }, 500)
+            this.$ajax.get('/api/proxy/user/index', {
+              params: {
+                start: this.endPage,
+                step: this.endPage + 10
+              }
+            })
+              .then(response => {
+                this.image1_list = this.image1_list.concat(response.data.data.image1_list)
+                this.image2_list = this.image2_list.concat(response.data.data.image2_list)
+                this.endPage = this.endPage + 10
+                // 加载状态结束
+                this.loading = false
+                if (r.code == 4006) {
+                  this.finished = true
+                }
+              })
+              .catch(error => {
+                console.log(error)
+                this.errored = true
+              })
+          },
+          500
+        )
 
       },
 

@@ -10,23 +10,32 @@
   import tabbar from '../common/tabbar.vue'
   import myheader from '../common/myheader.vue'
   import mycontent from './component/mycontent.vue'
+  import axios from 'axios'
 
   export default {
-    components: {tabbar, myheader, mycontent},
+    components: {tabbar, myheader, mycontent, axios},
     name: 'home',
     data () {
       return {
         msg: 'home',
-        image1_list:[],
-        image2_list:[],
+        image1_list: [],
+        image2_list: [],
 
       }
     },
     mounted: function () {
-      this.$api.get('user/index', null, r => {
-          this.image1_list = r.data.image1_list;
-          this.image2_list = r.data.image2_list;
-      })
+//      请求首页数据
+      this.$ajax.get('/api/proxy/user/index')
+        .then(response => {
+          console.log(response)
+          this.image1_list = response.data.data.image1_list
+          this.image2_list = response.data.data.image2_list
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => this.loading = false)
     },
 
   }
