@@ -1,13 +1,15 @@
 <template>
   <div id="header">
-    <div id="left" @click="showToolbar=true"><img src="@/assets/ext_images/suanggang.png" alt=""></div>
-    <van-popup v-model="showToolbar" position="left" class="toolbar">
-      这是扩展菜单栏
-    </van-popup>
+    <div id="left"  @click="open12"><img src="@/assets/ext_images/suanggang.png" alt=""></div>
+    <!--<van-popup v-model="showToolbar" position="left" class="toolbar">-->
+      <!--这是扩展菜单栏-->
+    <!--</van-popup>-->
     <div id="right" @click="showMessage=true"><img src="@/assets/ext_images/lingdang.png" alt=""></div>
-    <van-popup v-model="showMessage" position="right" class="toolbar">
-      这是通知
-    </van-popup>
+    <!--<van-popup v-model="showMessage" position="right" class="toolbar">-->
+      <!--<div>kdjkdjlkj</div>-->
+      <!--<div>kdjkdjlkj</div>-->
+      <!--<div>kdjkdjlkj</div>-->
+    <!--</van-popup>-->
   </div>
 </template>
 
@@ -26,7 +28,17 @@
         showMessage: false,
       }
     },
-    methods: {},
+    methods: {
+      open12() {
+        this.$notify({
+          title: 'HTML 片段',
+          dangerouslyUseHTMLString: true,
+          message: '<strong>这是 <i>HTML</i> 片段</strong>',
+          offset:50,
+//          position: 'top-left'
+        });
+      }
+    },
   }
 </script>
 
@@ -61,4 +73,8 @@
     width: 70%;
     height: 100%;
   }
+  .el{
+  margin-top: 2px;
+
+}
 </style>

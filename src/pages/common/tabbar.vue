@@ -1,10 +1,10 @@
 <template>
   <van-tabbar v-model="active" active-color="#07c160">
-    <van-tabbar-item icon="fire" info="4" to="/">首页</van-tabbar-item>
-    <van-tabbar-item icon="like" to="care">关注</van-tabbar-item>
-    <van-tabbar-item icon="add" @click="selectType">表白</van-tabbar-item>
-    <van-tabbar-item icon="comment" to="aboutme">消息</van-tabbar-item>
-    <van-tabbar-item icon="friends" to="mine">我的</van-tabbar-item>
+    <van-tabbar-item icon="fire" info="4" v-on:click="index">首页</van-tabbar-item>
+    <van-tabbar-item icon="like" v-on:click="care">关注</van-tabbar-item>
+    <van-tabbar-item icon="add" @click="selectType" v-on:click="confess">表白</van-tabbar-item>
+    <van-tabbar-item icon="comment" v-on:click="msg">消息</van-tabbar-item>
+    <van-tabbar-item icon="friends" v-on:click="mine">我的</van-tabbar-item>
     <van-actionsheet
       v-model="show"
       :actions="actions"
@@ -20,6 +20,7 @@
   import axios from 'axios'
 
   export default {
+    props:['message'],
     components: {
       [Icon.name]: Icon,
       [Tabbar.name]: Tabbar,
@@ -33,7 +34,7 @@
         show: false,
         actions: [
           {
-            name: '表白'
+            name: '表白',
           },
           {
             name: '失物招领',
@@ -69,9 +70,28 @@
         }
       },
       selectType () {
-        console.log(1233)
         this.show = true
-      }
+      },
+      index:function () {
+        this.$router.push({name: 'home',param:{token:this.message}});
+          console.log(this.message)
+      },
+      care:function () {
+          console.log(this.message)
+        this.$router.push({name: 'care',param:{token:this.message}});
+      },
+      confess:function () {
+          console.log(this.message)
+      },
+      msg:function () {
+        //console.log(this)
+        console.log(this.message)
+        this.$router.push({name: 'aboutme',param:{token:this.message}});
+      },
+      mine:function () {
+        this.$router.push({name: 'mine',param:{token:this.message}});
+        console.log(this.message)
+      },
     }
   }
 </script>

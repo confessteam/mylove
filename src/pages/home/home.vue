@@ -1,8 +1,8 @@
 <template>
   <div id="all">
     <myheader></myheader>
-    <mycontent :image1_list="image1_list" :image2_list="image2_list"></mycontent>
-    <tabbar></tabbar>
+    <mycontent :confesses1="confesses1" :confesses2="confesses2" :type="1"></mycontent>
+    <tabbar v-bind:message="this.parentMessage"></tabbar>
   </div>
 </template>
 
@@ -17,9 +17,11 @@
     name: 'home',
     data () {
       return {
+        parentMessage:null,
         msg: 'home',
-        image1_list: [],
-        image2_list: [],
+        confesses1: [],
+        confesses2: [],
+        type:1
 
       }
     },
@@ -28,8 +30,9 @@
       this.$ajax.get('/api/proxy/user/index')
         .then(response => {
           console.log(response)
-          this.image1_list = response.data.data.image1_list
-          this.image2_list = response.data.data.image2_list
+          this.confesses1 = response.data.data.confesses1
+          this.confesses2 = response.data.data.confesses2
+          console.log(this.image1_list)
         })
         .catch(error => {
           console.log(error)

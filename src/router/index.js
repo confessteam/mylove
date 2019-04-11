@@ -16,8 +16,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: home
+      name: 'login',
+      component: login
     }, {
       path: '/mine',
       name: 'mine',
@@ -35,9 +35,9 @@ export default new Router({
       name: 'care',
       component: care
     }, {
-      path: '/login',
-      name: 'login',
-      component: login
+      path: '/home',
+      name: 'home',
+      component: home
     }, {
       path: '/update',
       name: 'update',

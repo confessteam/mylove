@@ -11,18 +11,16 @@
       </div>
     </div>
     <div id="func">
-      <van-tabs v-model="active" animated style="z-index: 0">
+      <van-tabs v-model="active" style="z-index: 0" @click="onClick">
         <van-tab title="动态">
-          <mycontent :image1_list="image1_list" :image2_list="image2_list"></mycontent>
-          动态
+          <mycontent :image1_list="image1_list" :image2_list="image2_list" :type="3"></mycontent>
         </van-tab>
         <van-tab title="收藏">
-          <mycontent :image1_list="image1_list" :image2_list="image2_list"></mycontent>
-          收藏
+          <mycontent :image1_list="image1_list" :image2_list="image2_list" :type="4"></mycontent>
         </van-tab>
       </van-tabs>
     </div>
-    <tabbar></tabbar>
+    <tabbar v-bind:message="this.parentMessage"></tabbar>
   </div>
 </template>
 
@@ -45,31 +43,62 @@
     name: 'mine',
     data () {
       return {
+        parentMessage: null,
         active: 0,
-        icon:'@/assets/headImage/mynote.png',
-        image1_list:[],
-        image2_list:[]
+        icon: '@/assets/headImage/mynote.png',
+        image1_list: [],
+        image2_list: []
       }
     },
     methods: {
-      getIcon: function () {
-        console.log(this.value)
-        axios.get('http://www.fand.wang:8890/api/user/get_vcode', {
-          params: {
-            phonenum: this.value
-          }
-        })
-          .then(function (response) {
-            console.log(response)
+      onClick: function (index, title) {
+        var token = getCookie('token')
+        if (index == 0) {
+          console.log(token)
+          this.$ajax.get('/api/proxy/user/get_self_issue', {
+            params: {
+              token: token,
+            }
           })
-          .catch(function (response) {
-            console.log(response)
+            .then(response => {
+              console.log(response)
+              this.image1_list = response.data.data.image1_list
+              this.image2_list = response.data.data.image2_list
+            })
+            .catch(error => {
+              console.log(error)
+              this.errored = true
+            })
+            .finally(() => this.loading = false)
+        } else if (index == 1) {
+          console.log(token)
+          this.$ajax.get('/api/proxy/user/get_collections', {
+            params: {
+              token: token,
+            }
           })
-      }
+            .then(response => {
+              console.log(response)
+              this.image1_list = response.data.data.image1_list
+              this.image2_list = response.data.data.image2_list
+            })
+            .catch(error => {
+              console.log(error)
+              this.errored = true
+            })
+            .finally(() => this.loading = false)
+        }
+      },
     },
-    mounted:function () {
+    mounted: function () {
+      var token = getCookie('token')
+      console.log(token)
       //      请求首页数据
-      this.$ajax.get('/api/proxy/user/index')
+      this.$ajax.get('/api/proxy/user/get_self_issue', {
+        params: {
+          token: token,
+        }
+      })
         .then(response => {
           console.log(response)
           this.image1_list = response.data.data.image1_list
@@ -82,6 +111,23 @@
         .finally(() => this.loading = false)
 
     }
+  }
+
+  function setCookie (cname, cvalue, exdays) {
+    var d = new Date()
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
+    var expires = 'expires=' + d.toGMTString()
+    document.cookie = cname + '=' + cvalue + '; ' + expires
+  }
+
+  function getCookie (cname) {
+    var name = cname + '='
+    var ca = document.cookie.split(';')
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i].trim()
+      if (c.indexOf(name) == 0) return c.substring(name.length, c.length)
+    }
+    return ''
   }
 </script>
 

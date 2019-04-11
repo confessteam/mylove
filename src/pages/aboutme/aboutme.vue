@@ -2,7 +2,7 @@
   <div id="all">
     <myheader></myheader>
     <aboutmecomment></aboutmecomment>
-    <tabbar></tabbar>
+    <tabbar v-bind:message="this.parentMessage"></tabbar>
   </div>
 </template>
 
@@ -16,10 +16,46 @@
     name: 'aboutme',
     data () {
       return {
-        msg: 'aboutme'
+        msg: 'aboutme',
+        parentMessage:null,
       }
-    }
+    },
+     mounted: function () {
+
+       var token = getCookie("token")
+      console.log(token)
+//      请求首页数据
+      this.$ajax.get('/api/proxy/user/index')
+        .then(response => {
+          this.image1_list = response.data.data.image1_list
+          this.image2_list = response.data.data.image2_list
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => this.loading = false)
+    },
+    method:{},
   }
+  function setCookie(cname,cvalue,exdays)
+        {
+          var d = new Date();
+          d.setTime(d.getTime()+(exdays*24*60*60*1000));
+          var expires = "expires="+d.toGMTString();
+          document.cookie = cname + "=" + cvalue + "; " + expires;
+        }
+      function getCookie(cname)
+        {
+          var name = cname + "=";
+          var ca = document.cookie.split(';');
+          for(var i=0; i<ca.length; i++)
+          {
+            var c = ca[i].trim();
+            if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+          }
+          return "";
+        }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

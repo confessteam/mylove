@@ -8,18 +8,17 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: './',
+    assetsPublicPath: '/',
     proxyTable: {
       "/api":{
-        target: 'http://www.fand.wang:8890',
-        // target: 'http://127.0.0.1:8000',
+        // target: 'http://www.fand.wang:8890',
+        target: 'http://127.0.0.1:8000',
         changeOrigin:true,
-        pathRewrite: {
-        '^/api': ''   //这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替 比如我要调用'http://40.00.100.100:3002/user/add'，直接写‘/api/user/add’即可
-      }
+      //   pathRewrite: {
+      //   '^/api': ''   //这里理解成用‘/api’代替target里面的地址，后面组件中我们掉接口时直接用api代替 比如我要调用'http://40.00.100.100:3002/user/add'，直接写‘/api/user/add’即可
+      // }
     }},
 
     // Various Dev Server settings
@@ -62,7 +61,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: './',
+    assetsPublicPath: '/',
 
     /**
      * Source Maps
