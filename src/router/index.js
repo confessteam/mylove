@@ -9,6 +9,10 @@ import login from '@/pages/mine/component/login'
 import update from '@/pages/mine/component/update'
 import updUserInfo from '@/pages/mine/component/updUserInfo'
 import detail from '@/pages/common/detail'
+import lost from '@/pages/lost/lost'
+import others from '@/pages/others/others'
+import mall from '@/pages/mall/mall'
+
 
 Vue.use(Router)
 
@@ -54,6 +58,18 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: login
+    }, {
+      path: '/lost',
+      name: 'lost',
+      component: lost
+    }, {
+      path: '/mall',
+      name: 'mall',
+      component: mall
+    }, {
+      path: '/others',
+      name: 'others',
+      component: others
     }
   ]
 })

@@ -86,7 +86,7 @@
             }
             else if(response.data.code == 200){
               _this.$router.push({name: 'mine'})
-              setCookie("token", response.data.data.token, 1);
+              setCookie("token", response.data.data.token, 100);
               console.log(getCookie("token"))
             }
           })

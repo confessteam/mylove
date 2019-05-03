@@ -29,10 +29,8 @@
 //      请求首页数据
       this.$ajax.get('/api/proxy/user/index')
         .then(response => {
-          console.log(response)
           this.confesses1 = response.data.data.confesses1
           this.confesses2 = response.data.data.confesses2
-          console.log(this.image1_list)
         })
         .catch(error => {
           console.log(error)

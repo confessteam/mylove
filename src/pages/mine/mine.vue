@@ -13,10 +13,10 @@
     <div id="func">
       <van-tabs v-model="active" style="z-index: 0" @click="onClick">
         <van-tab title="动态">
-          <mycontent :image1_list="image1_list" :image2_list="image2_list" :type="3"></mycontent>
+          <mycontent :confesses1="confesses1" :confesses2="confesses2" :type="3"></mycontent>
         </van-tab>
         <van-tab title="收藏">
-          <mycontent :image1_list="image1_list" :image2_list="image2_list" :type="4"></mycontent>
+          <mycontent :confesses1="confesses1" :confesses2="confesses2" :type="4"></mycontent>
         </van-tab>
       </van-tabs>
     </div>
@@ -46,8 +46,8 @@
         parentMessage: null,
         active: 0,
         icon: '@/assets/headImage/mynote.png',
-        image1_list: [],
-        image2_list: []
+        confesses1: [],
+        confesses1: []
       }
     },
     methods: {
@@ -62,8 +62,8 @@
           })
             .then(response => {
               console.log(response)
-              this.image1_list = response.data.data.image1_list
-              this.image2_list = response.data.data.image2_list
+              this.confesses1 = response.data.data.confesses1
+              this.confesses2 = response.data.data.confesses2
             })
             .catch(error => {
               console.log(error)
@@ -79,8 +79,8 @@
           })
             .then(response => {
               console.log(response)
-              this.image1_list = response.data.data.image1_list
-              this.image2_list = response.data.data.image2_list
+              this.confesses1 = response.data.data.confesses1
+              this.confesses2 = response.data.data.confesses2
             })
             .catch(error => {
               console.log(error)
@@ -101,8 +101,8 @@
       })
         .then(response => {
           console.log(response)
-          this.image1_list = response.data.data.image1_list
-          this.image2_list = response.data.data.image2_list
+          this.confesses1 = response.data.data.confesses1
+          this.confesses2 = response.data.data.confesses2
         })
         .catch(error => {
           console.log(error)

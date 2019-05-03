@@ -9,12 +9,12 @@
 <script>
   import tabbar from '../common/tabbar.vue'
   import myheader from '../common/myheader.vue'
-  import carecomment from './component/carecomment.vue'
+  import lostcomment from './component/lostcomment.vue'
   import mycontent from '../home/component/mycontent.vue'
 
   export default {
-    components: {tabbar, myheader, carecomment, mycontent},
-    name: 'home',
+    components: {tabbar, myheader, lostcomment, mycontent},
+    name: 'lost',
     data () {
       return {
         parentMessage: null,
@@ -28,7 +28,7 @@
       var token = getCookie('token')
       console.log(token)
       //      请求首页数据
-      this.$ajax.get('/api/proxy/user/get_care_confessions', {
+      this.$ajax.get('/api/proxy/user/get_lost_and_found', {
         params: {
           token: token,
         }
